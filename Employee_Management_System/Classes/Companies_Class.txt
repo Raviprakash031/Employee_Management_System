@@ -1,0 +1,93 @@
+class Companies{
+  HashMap<Integer,Employee40> hs=new HashMap<Integer,Employee40>();
+  public void addEmployeeDetails(Employee40 emp){
+    hs.put(emp.getId(),emp);
+  }
+  public Employee40 getEmployeeDetailsById(int id){
+    return hs.get(id);
+  }
+  public void displayEmployeeDetails(){
+    boolean check=hs.isEmpty();
+    if(check==false){
+      for(Employee40 emp:hs.values()){
+        System.out.println("employee details are");
+        System.out.println("Employee Id:"+emp.getId());
+        System.out.println("employee Name:"+emp.getEmployeeName());
+        System.out.println("employee age:"+emp.getAge());
+        System.out.println("employee gender"+emp.getGender());
+        System.out.println("employee City "+emp.getCity());
+        System.out.println("employee Address"+emp.getAddress());
+        System.out.println("Employee mobile number"+emp.getMobileNumber());
+        System.out.println("employye Salary :"+emp.getSalary());
+        System.out.println("employee Date of joining"+emp.getDateOfJoining());
+        System.out.println("Employee company name: "+emp.companyName);
+      }
+    }
+    else{
+      System.out.println("collection is empty");
+    }
+        
+  }
+  public ArrayList<Employee40> getEmployeeByName(String name){
+    ArrayList<Employee40> al=new ArrayList<>();
+    for(Employee40 emp1:hs.values()){
+      if(emp1.getEmployeeName().equalsIgnoreCase(name)){
+        al.add(emp1);    
+      }
+    }
+    return al;
+    
+  }
+  public ArrayList<Employee40> getEmployeeByAgeGroup(int maxAge,int minAge){
+    ArrayList<Employee40> al1=new ArrayList<>();
+    for(Employee40 emp2:hs.values()){
+      if(emp2.getAge()>minAge && emp2.getAge()<maxAge){
+        al1.add(emp2);
+      }
+    }
+    return al1;
+  }
+  public ArrayList<Employee40> getEmployeeByCity(String city){
+    ArrayList<Employee40> al2=new ArrayList<>();
+    for(Employee40 emp3:hs.values()){
+      if(emp3.getCity().equalsIgnoreCase(city)){
+        al2.add(emp3);    
+      }
+    }
+    return al2;
+  }
+  public ArrayList<Employee40> getEmployeeBySalaryRange(int maxSalary,int minSalary){
+    ArrayList<Employee40> al3=new ArrayList<>();
+    
+    for(Employee40 emp4:hs.values()){
+      if(emp4.getSalary()>minSalary && emp4.getSalary()<maxSalary){
+        al3.add(emp4);
+      }
+    }
+    return al3;
+  }
+  public void deleteEmployeeDetailsById(int id){
+    boolean check =hs.isEmpty();
+    //Exception handling
+    try{
+    if(check!=false){
+      throw new InvalidIdException2("id is not valid");
+    }
+    else{
+      hs.remove(id);
+      System.out.println(id+"emppoyee details  will be deleted");
+    }
+    }
+    catch(InvalidIdException2 e){
+      System.out.println(e.getMessage());
+    }
+    System.out.println("no details found for that id");
+  }
+    
+  
+}
+class InvalidMobileNumber extends Exception{
+  InvalidMobileNumber(String msg){
+    super(msg);
+  }
+}
